@@ -1,25 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
 
+import ModePicker from './components/ModePicker';
+import HoverSquares from './components/HoverSquares';
+import Board from './components/Board';
+
+import { useBoardGame } from './hooks/useBoardGame';
+import { BoardGameContext } from './hooks/useBoardGame'
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const boardGame = useBoardGame()
+
+    return (
+        <BoardGameContext.Provider value={boardGame}>
+            <div className="App">
+                <ModePicker/>
+                <div style={{display: 'flex', justifyContent: 'space-between', padding: '10px'}}><Board/>
+                    <HoverSquares/>
+                </div>
+            </div>
+        </BoardGameContext.Provider>
+    );
 }
 
 export default App;
